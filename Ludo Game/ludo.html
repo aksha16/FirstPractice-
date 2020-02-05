@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ludo</title>
+        <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <body>
+            <style>
+                .main{
+                    background-color:grey;
+                    display: flex;
+                    width: 1200px;
+                    flex-direction: row;
+                    
+                }
+                .main > div{
+                    width: 389px;
+                    min-height: 389px;
+                    margin: 4px;
+                    background-color: white;
+                    text-align: center;
+                }
+                .grid-3 {
+                    width: 388px;
+                    display: flex;
+                    flex-direction: row;
+                }
+
+                .grid-3 > div{
+                    width: 124px;
+                    height: 63.5px;
+                    border: 1px solid;
+                    text-align: center;
+
+                }
+                .grid-6{
+                    width: 388px;
+                    display: flex;
+                    flex-direction: row;
+                }
+                .grid-6 > div{
+                    width: 63.5px;
+                    height: 124px;
+                    border: 1px solid;
+                    text-align: center;
+                }
+                .dot{
+                    flex-wrap: wrap;
+                    height: 35px;
+                    width: 10%;
+                    display: inline-block;
+                    border-radius: 100%;
+                    border:1px solid;
+                    padding:0px;
+                    margin-top:172px;
+                }
+                .doty{
+                    height: 35px !important;
+                    width: 35px !important;
+                    background-color: yellow;
+                    border-radius: 100%;
+                    border:1px solid;
+                    padding:0px;
+                    margin-left: 43px;
+                    margin-right: 43px;
+                    margin-top: 15px;
+                    margin-bottom: 15px;
+                }
+                .dotg{
+                    height: 10%;
+                    width: 10%;
+                    background-color:green;
+                    border-radius: 100%;
+                    border:1px solid;
+                    padding:0px;
+                    margin-top:0px;
+                }
+                 
+                    
+                   
+                
+
+
+                    
+
+                
+            </style>
+            <script>
+                var myDice = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
+                var iconYellow = ["y1", "y2", "y3", "y4"];
+                var iconRed = ["r1", "r2", "r3", "r4"];
+                var iconGreen = ["g1", "g2", "g3", "g4"];
+                var iconBlue = ["b1", "b2", "b3", "b4"];
+                var yellowWay = ["56", "57", "58", "59", "60", "16", "13", "10", "7", "4", "1",
+                                "2", "3", "6", "9", "12", "15", "18", "19", "20", "21", "22", "23",
+                                "24", "30", "36", "35", "34", "33", "32", "31", "37", "40", "43",
+                                "46", "49", "52", "53", "54", "51", "48", "45", "42", "39", "72", 
+                                "71", "70", "69", "68", "67", "61", "62", "63", "64", "65", "66"];
+                
+                var greenWay = ["35", "34", "33", "32", "31", "37", "40", "43", "46", "49", "52",
+                                "53", "54", "51", "48", "45", "42", "39", "72", "71", "70",
+                                "69", "68", "67", "61", "55", "56", "57", "58", "59", "60", "16",
+                                "13", "10", "7", "4", "1", "2", "3", "6", "9", "12", "15", "18",
+                                "19", "20", "21", "22", "23", "24", "30", "29", "28", "27", "26", "25"]
+                
+                
+                    
+                    
+                
+                var i = 0;
+                var j = 0;
+                var flag1 = 0 , flag2 = 0;
+                var coun = 0 ;
+                
+                function next(){
+                   
+                    //changed here
+                    var  roll = Math.floor(Math.random()*6);
+                    document.getElementById("dice").src = myDice[roll];
+                    if (yellowWay[i] == greenWay[j]){
+                        if (coun %2 == 0){
+                            document.getElementById(yellowWay[i]).classList.remove("doty");
+                        }
+                        else{
+                            document.getElementById(greenWay[j]).classList.remove("dotg");
+                        }
+                    }
+                    if (coun % 2 == 0){
+                        document.getElementById("yellowPlayer").disabled = false;
+                        document.getElementById("greenPlayer").disabled = true;
+                        if (roll+1==6){
+                            coun = coun +2;
+                        }
+                        if (roll+1 < 6){
+                            coun++;
+                        }
+                        if (i+roll+1==56){
+                            alert("Yay!!! Player yellow won");
+                             document.getElementById(greenWay[i+roll+1]).classList.remove("doty");
+                            location.reload();
+                           
+                        }
+                        
+                        else if (roll + 1 == 6 && flag1 == 0){
+                            document.getElementById("y1").classList.remove("dot");
+                            document.getElementById(yellowWay[0]).classList.add("doty");
+                            flag1 = 1;
+                        }
+                        
+                            
+                        
+                        else if (flag1 == 1 && (i+roll+1)<=55){
+                            document.getElementById(yellowWay[i]).classList.remove("doty");
+                            document.getElementById(yellowWay[i+roll+1]).classList.add("doty");
+                            i = i+roll+1;
+                        
+                        }
+
+                        
+                    }
+                    else{
+                        document.getElementById("greenPlayer").disabled = false;
+                        document.getElementById("yellowPlayer").disabled = true;
+                        if (roll+1==6){
+                            coun = coun +2;
+                        }
+                        if (roll+1 < 6){
+                            coun++;
+                        }
+
+                        if (j+roll+1==56){
+                            alert("Yay!!! Player green won");
+                            location.reload();
+                            document.getElementById(greenWay[j+roll+1]).classList.remove("dotg");
+                            
+                        }
+
+                        if (roll + 1 == 6 && flag2 == 0){
+                            document.getElementById("g1").classList.remove("dot");
+                            document.getElementById(greenWay[0]).classList.add("dotg");
+                            flag2 = 1;
+                            }
+
+                        
+                       
+                        else if (flag2 == 1 && (j+roll+1)<=55){
+                            document.getElementById(greenWay[j]).classList.remove("dotg");
+                            console.log("message : "+document.getElementById(greenWay[j.toString()]));
+                            document.getElementById(greenWay[j+roll+1]).classList.add("dotg");
+                            j = j+roll+1;
+                        
+                    }
+                    
+
+
+                    }
+                    
+                    
+                    
+                }
+                
+                
+            </script>
+            <div>
+                <div><h1 style="width:70%;">Ludo</h1></div>
+                <div style="float:right;">
+                    <button id = "yellowPlayer" style="background-color: sandybrown; font-size: xx-large; margin-top: 80px;">Player Yellow's turn</button><br>
+                    <button onclick="next()" style="font-size: 40px;">Roll</button>
+                    <img  id='dice' src ="dice.png" width="120" height="120"><br>
+                    <button id = "greenPlayer" style="background-color: sandybrown; font-size: xx-large;">Player Green's turn</button>
+                </div>
+                <div>
+                    <div class = "main">
+                        <div id = "yellow" style="background-color: yellow;">
+                            
+                                <div class="dot" id ="y1"></div>
+                                <span class="dot" id = "y2"></span>
+                                <span class="dot" id = "y3"></span>
+                                <span class="dot" id = "y4"></span>
+                               
+                        
+                        </div>
+                        <div style="flex-direction: column;">
+                             <div class = "grid-3">
+                                <div id = "1"></div>
+                                <div id = "2"></div>
+                                <div id = "3"></div> 
+                             </div>
+                            <div class = "grid-3">
+                                <div id = "4"></div>
+                                <div id = "5" style="background-color: red;"></div>
+                                <div id = "6" style="font-size: xx-large;" class="fa fa-star"></div>
+                            </div>
+                            <div class = "grid-3">
+                                <div id = "7" style=" font-size: xx-large;" class="fa fa-star"></div>
+                                <div id = "8" style="background-color: red;"></div>
+                                <div id = "9" ></div>
+                            </div>
+                            <div class = "grid-3">
+                                <div id = "10"></div>
+                                <div id = "11" style="background-color: red;"></div>
+                                <div id = "12"></div>
+                            </div>
+                            <div class = "grid-3">
+                                <div id = "13"></div>
+                                <div id = "14" style="background-color: red;"></div>
+                                <div id = "15"></div>
+                            </div>
+                            <div class = "grid-3">
+                                <div id = "16"></div>
+                                <div id = "17" style="background-color: red;"></div>
+                                <div id = "18"></div>
+                            </div>
+                        </div>
+                        <div id = "red" style="background-color: red;">
+                            <span class="dot" id = "r1"></span>
+                            <span class="dot" id = "r2"></span>
+                            <span class="dot" id = "r3"></span>
+                            <span class="dot" id = "r4"></span>
+                        </div>
+                    </div>
+                    <div class = "main">
+                        <div style="flex-direction: row;">
+                            <div class="grid-6">
+                                <div id = "55"></div>
+                                <div id = "56" style=" font-size: xx-large;" class="fa fa-star"></div>
+                                <div id = "57"></div>
+                                <div id = "58"></div>
+                                <div id = "59"></div>
+                                <div id = "60"></div>
+                            </div>
+                            <div class="grid-6">
+                                <div id = "61"></div>
+                                <div id = "62" style="background-color: yellow;"></div>
+                                <div id = "63" style="background-color: yellow;"></div>
+                                <div id = "64" style="background-color: yellow;"></div>
+                                <div id = "65" style="background-color: yellow;"></div>
+                                <div id = "66" style="background-color: yellow;"></div>
+                            </div>
+                            <div class="grid-6">
+                                <div id = "67"></div>
+                                <div id = "68"></div>
+                                <div id = "69" style=" font-size: xx-large;" class="fa fa-star"></div>
+                                <div id = "70"></div>
+                                <div id = "71"></div>
+                                <div id = "72"></div>
+                            </div>
+                        </div>
+                        <div style="background-color: lightslategray;font-size: 40px;">HOME</div>
+                        <div style="flex-direction: row;">
+                            <div class="grid-6">
+                                <div id = "19"></div>
+                                <div id = "20"></div>
+                                <div id = "21" ></div>
+                                <div id = "22" style=" font-size: xx-large;" class="fa fa-star"></div>
+                                <div id = "23"></div>
+                                <div id = "24"></div>
+                            </div>
+                            <div class="grid-6">
+                                <div id = "25" style="background-color: green;"></div>
+                                <div id = "26" style="background-color: green;"></div>
+                                <div id = "27" style="background-color: green;"></div>
+                                <div id = "28" style="background-color: green;"></div>
+                                <div id = "29" style="background-color: green;"></div>
+                                <div id = "30"></div>
+                            </div>
+                            <div class="grid-6">
+                                <div id = "31"></div>
+                                <div id = "32"></div>
+                                <div id = "33"></div>
+                                <div id = "34"></div>
+                                <div id = "35" style="font-size: xx-large;" class="fa fa-star"></div>
+                                <div id = "36"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class = "main">
+                        <div id = "blue" style="background-color: blue;">
+                            <span class="dot" id = "b1"></span>
+                            <span class="dot" id = "b2"></span>
+                            <span class="dot" id = "b3"></span>
+                            <span class="dot" id = "b4"></span>
+                        </div>
+                        <div style="flex-direction: column;">
+                            <div class = "grid-3">
+                               <div id = "39"></div>
+                               <div id = "38" style="background-color: blue;"></div>
+                               <div id = "37"></div> 
+                            </div>
+                           <div class = "grid-3">
+                               <div id = "42"></div>
+                               <div id = "41" style="background-color: blue;"></div>
+                               <div id = "40"></div>
+                           </div>
+                           <div class = "grid-3">
+                               <div id = "45"></div>
+                               <div id = "44" style="background-color: blue;"></div>
+                               <div id = "43"></div>
+                           </div>
+                           <div class = "grid-3">
+                               <div id = "48"></div>
+                               <div id = "47" style="background-color: blue;"></div>
+                               <div id = "46" style=" font-size: xx-large;" class="fa fa-star"></div>
+                           </div>
+                           <div class = "grid-3">
+                               <div id = "51" style=" font-size: xx-large;" class="fa fa-star"></div>
+                               <div id = "50" style="background-color: blue;"></div>
+                               <div id = "49"></div>
+                           </div>
+                           <div class = "grid-3">
+                               <div id = "54"></div>
+                               <div id = "53"></div>
+                               <div id = "52"></div>
+                           </div>
+                       </div>
+                        <div id="green" style="background-color: green; text-align: center;">
+                            <span class="dot" id = "g1"></span>
+                            <span class="dot" id = "g2"></span>
+                            <span class="dot" id = "g3"></span>
+                            <span class="dot" id = "g4"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </body>
+    </head>
+</html>

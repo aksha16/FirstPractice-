@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ludo</title>
+        <body>
+            <style>
+                .main{
+                    width: 70%;
+                    height: 1200px;
+                    position: relative;
+                    border-style: solid;
+                    margin: 20px;
+
+                }
+                .yellow{
+                    background-color: yellow;
+                    width: 35%;
+                    height: 400px;
+                    margin: 8px;
+                    float: left;
+                }
+
+                .red{
+                    background-color: red;
+                    width: 35%;
+                    height: 400px;
+                    background-size: cover;
+                    margin: 8px;
+                    float: right;
+                }
+                .green{
+                    background-color: green;
+                    width: 35%;
+                    height: 400px;
+                    background-size: cover;
+                    margin: 8px;
+                    float: right;
+                }
+
+                .blue{
+                    background-color: blue;
+                    width: 35%;
+                    float: left;
+                    height: 400px;
+                    background-size: cover;
+                    margin: 8px;
+
+                }
+                .home{
+                    width: 30%;
+                    height: 360px;
+                    align-items: center;
+                    margin: 0 auto;
+                    background-color: chocolate;
+                    display: block;
+                }
+                .dice{
+                    float:right;
+                }
+            
+
+            </style>
+
+            <script>
+                var myDice = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"]
+                function diceRoll(){
+                    roll = Math.floor(Math.random()*6);
+                    document.getElementById("dice").src = myDice[roll];
+                }
+                function grid(){
+                    let i = 0;
+                    for (i;i<6;i++){
+                        
+                    }
+                }
+            
+            
+            
+            
+            
+            </script>
+
+
+
+
+
+
+
+            <div>
+                <div><h1 style='text-align: center;'>Ludo</h1></div>
+                <!-- <div class="main">
+                    <div class="yellow"></div>
+                    <div class="red"></div>
+                    <div class="green"></div>
+                    <div class="blue"></div>
+                    <div class="home"></div>
+                </div> -->
+                <div style="float:right; display : inline;">
+                    <button onclick="diceRoll()">Roll
+                        
+                    </button>
+                    <img  id='dice' src ="dice.png" width="107" height="98">
+                </div>
+                <div class="main">
+                    <div style="display: block; height: 408px;">
+                        <div class="yellow"></div>
+                        <div class="red"></div>
+                    </div>
+                    <div> 
+                        <div class = "home" style="text-align: center;">
+                            <div>
+                                <h1 style="margin: auto; padding-top: 152px;">HOME</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: block; height: 408px;">
+                        <div class="green"></div>
+                        <div class="blue"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </body>
+    </head>
+
+</html>
